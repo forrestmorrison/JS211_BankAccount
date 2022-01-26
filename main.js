@@ -59,3 +59,26 @@ toddCarter.charge("Chipotle", -20);
 
 console.log(toddCarter.balance());
 console.log(toddCarter.transactions);
+
+class SavingsAccount extends BankAccount {
+    constructor(accountNumber, owner, interestRate){
+      super(accountNumber, owner);
+      this.interestRate = interestRate;
+    }
+
+    // uses balance() to get current balance & add new transaction representiong deposit of appropriate amount
+    accrueInterest() {
+        let currentBalance = this.balance();
+        let newDeposit = currentBalance * this.interestRate + this.balance();
+        this.deposit(newDeposit);
+        return this.balance();
+    }
+  }
+
+let toddCarterSavings = new SavingsAccount(011, "Todd Carter", 0.05);
+
+console.log(toddCarterSavings.deposit(750));
+
+toddCarterSavings.accrueInterest();
+
+console.log(toddCarterSavings.balance());
